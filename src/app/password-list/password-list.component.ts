@@ -26,7 +26,6 @@ export class PasswordListComponent {
     this.siteForm = this.formBuilder.group({
       id: [''],
       username: [''],
-      email : [''],
       password: ['',[Validators.required]],
     })
   }
@@ -51,12 +50,11 @@ export class PasswordListComponent {
       this.siteForm.reset()
     })
   }
-  onEdit(id:string,userName:string,email:string,password:string):void{
+  onEdit(id:string,userName:string,password:string):void{
     this.state = 'Edit'
     this.siteForm.patchValue({
       id: id,
-      userName: userName,
-      email: email,
+      username: userName,
       password: password
     })
   }
