@@ -1,65 +1,69 @@
-<div class="container mx-auto px-4">
+<div class="container mx-auto px-4 md:px-8 lg:px-16">
   <button
     class="bg-gray-900 text-white font-semibold px-4 p-2 border-2 rounded-lg"
   >
     Add New Site
   </button>
 <p *ngIf="isSuccess" class="font-semibold bg-blue-300 text-white p-2 rounded-lg m-2 ">Data Saved Successfully</p>
-  <div class="px-20 py-10 border-2 my-5 mx-auto rounded-2xl">
-    <h1 class="text-center font-bold text-2xl p-2">{{state}} sites</h1>
-    <form [formGroup]="siteForm" (ngSubmit)="onSubmit()">
-      <div class="flex flex-col">
-        <label for="siteName" class="text-2xl font-bold m-2">Site Name:</label>
-        <input
-          type="text"
-          formControlName="siteName"
-          name="siteName"
-          class="border-2 rounded-lg p-2 m-2"
-          placeholder="Enter site name"
-          required
-        />
-      </div>
-      <div class="flex flex-col">
-        <label for="siteURL" class="text-2xl font-bold m-2">Site URL:</label>
-        <input
-          type="text"
-          name="siteURL"
-          class="border-2 rounded-lg p-2 m-2"
-          placeholder="Enter siteURL"
-          formControlName="siteURL"
-          required
-        />
-      </div>
-      <div class="flex flex-col">
-        <label for="siteImgURL" class="text-2xl font-bold m-2"
-          >siteImgURL</label
-        >
-        <input
-          type="text"
-          name="siteImgURL"
-          class="border-2 rounded-lg p-2 m-2"
-          placeholder="Enter siteImgURL"
-          formControlName="siteImgURL"
-          required
-        />
-      </div>
-      <button class="p-2 m-2 bg-gray-900 text-white font-semibold cursor-pointer">{{state}} Site</button>
-    </form>
+  <div class="px-16 py-10 border-2 my-5 mx-auto rounded-2xl grid grid-cols-1 md:grid-cols-2 gap-4">
+    <img class="rounded-lg w-[460px] m-auto" src="https://imgs.search.brave.com/pa9fRZy1urYa20vuqHmbzmX8QqfIySUk5YAW9OcD_tY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3ZpdGUvYXNz/ZXRzL3Bob3RvLW1h/c3RoZWFkLTM3NS1C/b0tfcDhMRy53ZWJw" alt="site">
+    <div>
+      <h1 class="text-3xl font-bold p-3 text-center">{{state }} site</h1>
+      <form [formGroup]="siteForm" (ngSubmit)="onSubmit()">
+        <div class="flex flex-col">
+          <label for="siteName" class="text-2xl font-bold m-2">Site Name:</label>
+          <input
+            type="text"
+            formControlName="siteName"
+            name="siteName"
+            class="border-2 rounded-lg p-2 m-2"
+            placeholder="Enter site name"
+            required
+          />
+        </div>
+        <div class="flex flex-col">
+          <label for="siteURL" class="text-2xl font-bold m-2">Site URL:</label>
+          <input
+            type="text"
+            name="siteURL"
+            class="border-2 rounded-lg p-2 m-2"
+            placeholder="Enter siteURL"
+            formControlName="siteURL"
+            required
+          />
+        </div>
+        <div class="flex flex-col">
+          <label for="siteImgURL" class="text-2xl font-bold m-2"
+            >siteImgURL</label
+          >
+          <input
+            type="text"
+            name="siteImgURL"
+            class="border-2 rounded-lg p-2 m-2"
+            placeholder="Enter siteImgURL"
+            formControlName="siteImgURL"
+            required
+          />
+        </div>
+        <button class="p-2 m-2 bg-gray-900 text-white font-semibold cursor-pointer">{{state}} Site</button>
+      </form>
+    </div>
+    
   </div>
 
-  <div class="grid grid-cols-4 gap-3">
-    <div class="rounded-lg shadow-lg flex flex-col gap-4 p-4" *ngFor="let site of allSites | async">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4 border-2">
+    <div class="rounded-lg shadow-lg flex flex-col gap-4 p-4 w-90 sm:w-60 md:w-70 border-2 m-auto" *ngFor="let site of allSites | async">
       <img
         [src]="site.siteImgURL"
         alt="site"
         class="rounded-lg shadow-lg p-2 w-full"
       />
       <h2 class="text-2xl font-semibold italic">{{site.siteName}}</h2>
-      <a class="font-semibold p-2 cursor-pointer bg-blue-400 rounded-lg mb" [href]="site.siteURL"
+      <a class="font-semibold p-2 cursor-pointer bg-blue-400 rounded-lg " [href]="site.siteURL"
         >{{site.siteURL}}</a
       >
       <div class="flex justify-center gap-2 items-center">
-        <button class="bg-gray-900 text-white font-semibold p-2 rounded-lg">
+        <button class="bg-gray-900 text-white font-semibold p-2 rounded-lg cursor-pointer" [routerLink]="['/passwordList',site.id]">
           Add New PassWord
         </button>
         <button class=" font-semibold p-2 rounded-lg border-2 cursor-pointer" (click)="editSite(site.siteName,site.siteURL,site.siteImgURL,site.id)">

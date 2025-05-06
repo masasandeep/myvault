@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { addDoc, collection, collectionData, deleteDoc, doc, Firestore, updateDoc } from '@angular/fire/firestore';
+import { addDoc, collection, collectionData, deleteDoc, doc, docData, Firestore, getDoc, updateDoc } from '@angular/fire/firestore';
+import { Observable,from } from 'rxjs';
+import { Site } from './site';
 @Injectable({
   providedIn: 'root'
 })
@@ -22,5 +24,18 @@ export class PasswordmanagerService {
     const dbInstance = doc(this.firestore,'sites',id)
     return deleteDoc(dbInstance)
 
+  }
+  loadPasswords(id:string){
+    const dbInstance = collection(this.firestore,`sites/${id}/passwords` );
+    return collectionData(dbInstance, { idField: 'id' });
+  }
+  
+  getSiteDetails(id:string): Observable<Site>{
+    const dbInstance = doc(this.firestore,'sites',id)
+    return docData(dbInstance, { idField: 'id' }) as Observable<Site>;
+  }
+  addPassword(id:string,data:object){
+    const dbInstance = collection(this.firestore,`sites/${id}/passwords`);
+    return addDoc(dbInstance,data)
   }
 }

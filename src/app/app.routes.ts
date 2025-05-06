@@ -12,7 +12,7 @@ export const routes: Routes = [
         path: 'siteList',
         component:ViewsitesComponent
     },{
-        path: 'password-list',
+        path: 'passwordList/:id',
         component: PasswordListComponent
     }
 ];
