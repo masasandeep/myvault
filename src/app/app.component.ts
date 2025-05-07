@@ -5,7 +5,7 @@ import { ViewsitesComponent } from './viewsites/viewsites.component';
 
 @Component({
   selector: 'app-root',
-  imports: [ViewsitesComponent,NavbarComponent,RouterModule,RouterOutlet],
+  imports: [NavbarComponent,RouterModule,RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
