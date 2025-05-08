@@ -74,12 +74,14 @@ export class PasswordListComponent {
         )
         .then(() => {
           this.isSuccess = true;
-          console.log('Data updated Successfully');
           this.siteForm.reset();
           this.state = 'Add';
+          setTimeout(() => {
+            this.isSuccess = false;
+          }, 2000);
         })
         .catch((err) => {
-          console.log('Error occured', err);
+          alert('Error occured'+ err);
         });
     } else {
       this.passwordManagerService
@@ -103,10 +105,10 @@ export class PasswordListComponent {
     this.passwordManagerService
       .deletePassword(this.siteId, id)
       .then(() => {
-        this.isSuccess = true;
+        console.log('Password deleted successfully');
       })
       .catch((err) => {
-        console.log('Error occured', err);
+        alert('Error occured'+err);
       });
   }
   copyPassword(password: string): void {

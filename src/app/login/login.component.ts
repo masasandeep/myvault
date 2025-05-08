@@ -16,7 +16,7 @@ export class LoginComponent {
   constructor(private auth: AuthService,private formBuilder: FormBuilder,private router:Router){
     this.loginForm = this.formBuilder.group({
       email: ['',[Validators.required, Validators.email]],
-      Password: ['', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]]
+      password: ['', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]]
     })
   }
   onSubmit(): void{

@@ -1,18 +1,25 @@
 <app-navbar></app-navbar>
-<div class="container mx-auto px-4 md:px-8 lg:px-16">
-  <button
-    class="bg-gray-900 text-white font-semibold px-4 p-2 border-2 rounded-lg"
-  >
-    Add New Site
-  </button>
+<div class="mx-auto p-4 h-full lg:px-16 bg-[#222222] text-zinc-300">
+  <div class="px-16 py-10 border-2 my-5 mx-auto rounded-2xl grid grid-cols-1 md:grid-cols-2 gap-4 h-full">
+    <img class="rounded-lg w-[460px] m-auto" src="assets/main.jpg" alt="site">
+    <div class="p-4 m-auto flex flex-col items-center">
+      <h1 class="line text-2xl/7 italic mb-3">This project is a secure password manager that allows users to store, retrieve, and manage their passwords in an encrypted format. It features user authentication, strong encryption for data protection, and a simple, user-friendly interface. The goal is to provide a safe and efficient way to manage multiple credentials without compromising security.</h1>
+      <button
+      class="bg-[#222222] font-semibold px-4 p-2 m-2 border-2 rounded-lg cursor-pointer"
+      (click)="toggle()"
+    >
+      Add New Site
+    </button>
+    </div>
+  </div>
 <p *ngIf="isSuccess" class="font-semibold bg-blue-300 text-white p-2 rounded-lg m-2 ">Data Saved Successfully</p>
-  <div class="px-16 py-10 border-2 my-5 mx-auto rounded-2xl grid grid-cols-1 md:grid-cols-2 gap-4">
-    <img class="rounded-lg w-[460px] m-auto" src="https://imgs.search.brave.com/pa9fRZy1urYa20vuqHmbzmX8QqfIySUk5YAW9OcD_tY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3ZpdGUvYXNz/ZXRzL3Bob3RvLW1h/c3RoZWFkLTM3NS1C/b0tfcDhMRy53ZWJw" alt="site">
+  <div *ngIf="showForm" class="px-16 py-10 border-2 my-5 mx-auto rounded-2xl grid grid-cols-1 md:grid-cols-2 gap-4">
+    <img class="rounded-lg w-[460px] m-auto" src="assets/home.jpg" alt="site">
     <div>
       <h1 class="text-3xl font-bold p-3 text-center">{{state }} site</h1>
       <form [formGroup]="siteForm" (ngSubmit)="onSubmit()">
         <div class="flex flex-col">
-          <label for="siteName" class="text-2xl font-bold m-2">Site Name:</label>
+          <label for="siteName" class="italic m-2">Site Name:</label>
           <input
             type="text"
             formControlName="siteName"
@@ -23,7 +30,7 @@
           />
         </div>
         <div class="flex flex-col">
-          <label for="siteURL" class="text-2xl font-bold m-2">Site URL:</label>
+          <label for="siteURL" class="italic m-2">Site URL:</label>
           <input
             type="text"
             name="siteURL"
@@ -34,8 +41,8 @@
           />
         </div>
         <div class="flex flex-col">
-          <label for="siteImgURL" class="text-2xl font-bold m-2"
-            >siteImgURL</label
+          <label for="siteImgURL" class="italic m-2"
+            >ImgURL</label
           >
           <input
             type="text"
@@ -46,30 +53,32 @@
             required
           />
         </div>
-        <button class="p-2 m-2 bg-gray-900 text-white font-semibold cursor-pointer">{{state}} Site</button>
+        <button class="p-2 m-2 bg-[#222222]  text-white font-semibold cursor-pointer border-sky-300 border rounded-lg">{{state}} Site</button>
       </form>
     </div>
     
   </div>
 
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4 border-2">
-    <div class="rounded-lg shadow-lg flex flex-col gap-4 p-4 w-90 sm:w-60 md:w-70 border-2 m-auto" *ngFor="let site of allSites | async">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 p-4" *ngIf="allSites.length >0">
+    <div class="rounded-lg shadow-lg flex flex-col gap-4 p-4 w-95 sm:w-75  border-2 m-auto" *ngFor="let site of allSites ">
       <img
         [src]="site.siteImgURL"
         alt="site"
         class="rounded-lg shadow-lg p-2 w-full"
       />
+      <p class="">Name:</p>
       <h2 class="text-2xl font-semibold italic">{{site.siteName}}</h2>
-      <a class="font-semibold p-2 cursor-pointer bg-blue-400 rounded-lg " [href]="site.siteURL"
+      <p class="">Site:</p>
+      <a class="font-semibold text-xl cursor-pointer rounded-lg " [href]="site.siteURL"
         >{{site.siteURL}}</a
       >
       <div class="flex justify-center gap-2 items-center">
-        <button class="bg-gray-900 text-white font-semibold p-2 rounded-lg cursor-pointer" [routerLink]="['/passwordList',site.id]">
+        <button class="bg-[#222222]  text-white font-semibold p-2 rounded-lg cursor-pointer border border-sky-300" [routerLink]="['/passwordList',site.id]">
           Add New PassWord
         </button>
-        <button class=" font-semibold p-2 rounded-lg border-2 cursor-pointer" (click)="editSite(site.siteName,site.siteURL,site.siteImgURL,site.id)">
+        <button class=" font-semibold p-2 bg-[#222222]  rounded-lg border-2 cursor-pointer border-sky-300 " (click)="editSite(site.siteName,site.siteURL,site.siteImgURL,site.id)">
           Edit</button
-        ><button class="font-semibold p-2 rounded-lg border-2 cursor-pointer" (click)="deleteSite(site.id)">
+        ><button class="font-semibold p-2  bg-[#222222] rounded-lg border-2 cursor-pointer border-sky-300 " (click)="deleteSite(site.id)">
           Delete
         </button>
       </div>

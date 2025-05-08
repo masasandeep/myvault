@@ -13,12 +13,18 @@ import { NavbarComponent } from '../navbar/navbar.component';
   styleUrl: './viewsites.component.css'
 })
 export class ViewsitesComponent {
-  allSites!: Observable<Array<any>>
+  allSites!: Array<any>
   siteForm!: FormGroup
   state: string = 'Add'
   isSuccess:boolean = false
+  showForm:boolean = false
+  ngOnInit() {
+    this.passwordManagerService.loadSite().subscribe(data=>{
+      this.allSites = data
+    })
+  }
   constructor(private passwordManagerService: PasswordmanagerService,private formBuilder: FormBuilder) {
-    this.loadSites()
+
     this.siteForm = this.formBuilder.group({
       id: [''],
       siteName: ['',[Validators.required]],
@@ -26,35 +32,34 @@ export class ViewsitesComponent {
       siteImgURL: ['',[Validators.required]],
     })
   }
-  loadSites(){
-    console.log("Loading sites")
-    this.allSites = this.passwordManagerService.loadSite()
-  }
   onSubmit(){
     if(this.state == 'Edit'){
       this.passwordManagerService.updateSite(this.siteForm.value.id,this.siteForm.value).
       then(()=>{
         this.isSuccess = true
-        console.log("Data updated Successfully")
+        
         this.siteForm.reset()
         this.state = 'Add'
+        setTimeout(() => {
+          this.isSuccess = false;
+        }, 2000);
       }).
       catch(err=>{
-        console.log("Error occured",err)
+        alert("Error occured"+err)
       })
     }
     else{
       this.passwordManagerService.addSite(this.siteForm.value).
       then(()=>{
         this.isSuccess = true
-        console.log("Data updated Successfully")
         this.siteForm.reset()
         this.state = 'Add'
       })
       .catch(err=>{
-        console.log("Error occured",err)
+        alert("Error occured"+err)
       })
     }
+    this.toggle()
     }
     editSite(siteName:string,siteURL:string,siteImgURL:string,id:string){
       this.state = 'Edit'
@@ -64,6 +69,7 @@ export class ViewsitesComponent {
         siteName: siteName,
         siteURL: siteURL
       })
+      this.toggle()
     }
     deleteSite(id:string){
       this.passwordManagerService.deleteSite(id).
@@ -71,7 +77,10 @@ export class ViewsitesComponent {
         console.log("Data deleted successfully")
       })
       .catch(err=>{
-        console.log("Error occured",err)
+        alert("Error occured"+err)
       })
+    }
+    toggle(){
+      this.showForm = !this.showForm
     }
 }

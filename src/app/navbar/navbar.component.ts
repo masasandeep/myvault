@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../login/auth.service';
 import { Router } from '@angular/router';
+import { User } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-navbar',
