@@ -1,1 +1,55 @@
-<p>login works!</p>
+<div class="h-full md:h-screen w-screen m-auto bg-black text-white">
+  <div class="grid grid-cols-1 md:grid-cols-2 h-full p-8">
+    
+      <img
+      src="assets/3065018.jpg"
+        class="w-[90%] h-[90%] object-cover rounded-2xl m-auto"
+        alt="login image"
+      />
+    
+    <div class="lg:px-20 lg:py-10 m-2 px-10 md:py-5">
+        <h1 class="text-3xl font-bold text-center mb-2">Welcome back</h1>
+        <p class="italic mb-2">Please enter your details</p>
+        <div class="p-4 m-auto">
+            <button class="p-2 text-center border w-full rounded-lg hover:rounded-full cursor-pointer" (click)="googleLogin()">
+                <img src="assets/logo.jpg" alt="google logo"
+                class="w-6 h-6 inline rounded-lg"/>
+                Sign in with Google
+            </button>
+        </div>
+        <div class="flex items-center my-4">
+            <hr class="flex-grow border-t border-gray-700" />
+            <span class="mx-2  text-sm italic">or</span>
+            <hr class="flex-grow border-t border-gray-700" />
+          </div>
+      <form [formGroup]="loginForm">
+        <div class="flex flex-col space-y-2">
+          <label for="email" class="font-semibold">Email</label>
+          <input
+            type="email"
+            class="border rounded-lg p-2 m-2"
+            placeholder="Enter Email"
+            formControlName="email"
+          />
+        </div>
+        <div class="flex flex-col space-y-2">
+          <label for="password" class="font-semibold">password</label>
+          <input
+            type="email"
+            class="border rounded-lg p-2 m-2"
+            placeholder="Enter password"
+            formControlName="password"
+          />
+        </div>
+        <button class="italic hover:underline cursor-pointer">Dont have an account</button>
+        <button
+          type="submit"
+          class="bg-gray-800 hover:rounded-full  text-white font-semibold cursor-pointer rounded-lg p-2 mt-4 w-full"
+          (click)="onSubmit()"
+        >
+          Login
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

@@ -12,11 +12,12 @@ import { ActivatedRoute } from '@angular/router';
 import { faEye, faEyeSlash, faPaste } from '@fortawesome/free-solid-svg-icons';
 import { Site } from '../site';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-password-list',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, FontAwesomeModule],
+  imports: [ReactiveFormsModule, CommonModule, FontAwesomeModule,NavbarComponent],
   templateUrl: './password-list.component.html',
   styleUrl: './password-list.component.css',
 })

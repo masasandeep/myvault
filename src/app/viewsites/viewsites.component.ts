@@ -4,10 +4,11 @@ import { PasswordmanagerService } from '../passwordmanager.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-viewsites',
-  imports: [ReactiveFormsModule,CommonModule,RouterLink],
+  imports: [ReactiveFormsModule,CommonModule,RouterLink,NavbarComponent],
   templateUrl: './viewsites.component.html',
   styleUrl: './viewsites.component.css'
 })
