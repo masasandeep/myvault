@@ -54,10 +54,14 @@ export class ViewsitesComponent {
         this.isSuccess = true
         this.siteForm.reset()
         this.state = 'Add'
+        setTimeout(() => {
+          this.isSuccess = false;
+        }, 2000);
       })
       .catch(err=>{
         alert("Error occured"+err)
       })
+      
     }
     this.toggle()
     }

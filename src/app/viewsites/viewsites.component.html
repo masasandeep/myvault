@@ -14,7 +14,7 @@
   </div>
 <p *ngIf="isSuccess" class="font-semibold bg-blue-300 text-white p-2 rounded-lg m-2 ">Data Saved Successfully</p>
   <div *ngIf="showForm" class="px-16 py-10 border-2 my-5 mx-auto rounded-2xl grid grid-cols-1 md:grid-cols-2 gap-4">
-    <img class="rounded-lg w-[460px] m-auto" src="assets/home.jpg" alt="site">
+    <img  class="rounded-lg w-[460px] m-auto" [src]="siteForm.get('siteImgURL')?.value || 'assets/home.jpg'" alt="site">
     <div>
       <h1 class="text-3xl font-bold p-3 text-center">{{state }} site</h1>
       <form [formGroup]="siteForm" (ngSubmit)="onSubmit()">
@@ -66,19 +66,19 @@
         alt="site"
         class="rounded-lg shadow-lg p-2 w-full"
       />
-      <p class="">Name:</p>
+      <p class="font-bold">Name:</p>
       <h2 class="text-2xl font-semibold italic">{{site.siteName}}</h2>
-      <p class="">Site:</p>
-      <a class="font-semibold text-xl cursor-pointer rounded-lg " [href]="site.siteURL"
+      <p class="font-bold">Site:</p>
+      <a class="font-semibold text-xl cursor-pointer rounded-lg underline decoration-red-500" [href]="site.siteURL"
         >{{site.siteURL}}</a
       >
       <div class="flex justify-center gap-2 items-center">
-        <button class="bg-[#222222]  text-white font-semibold p-2 rounded-lg cursor-pointer border border-sky-300" [routerLink]="['/passwordList',site.id]">
+        <button class="bg-[#222222]  text-white font-semibold p-2 rounded-lg cursor-pointer border border-red-700" [routerLink]="['/passwordList',site.id]">
           Add New PassWord
         </button>
-        <button class=" font-semibold p-2 bg-[#222222]  rounded-lg border-2 cursor-pointer border-sky-300 " (click)="editSite(site.siteName,site.siteURL,site.siteImgURL,site.id)">
+        <button class=" font-semibold p-2 bg-[#222222]  rounded-lg border-2 cursor-pointer  border-red-700" (click)="editSite(site.siteName,site.siteURL,site.siteImgURL,site.id)">
           Edit</button
-        ><button class="font-semibold p-2  bg-[#222222] rounded-lg border-2 cursor-pointer border-sky-300 " (click)="deleteSite(site.id)">
+        ><button class="font-semibold p-2  bg-[#222222] rounded-lg border-2 cursor-pointer  border-red-700 " (click)="deleteSite(site.id)">
           Delete
         </button>
       </div>
