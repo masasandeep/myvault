@@ -13,6 +13,7 @@ import {  Router } from '@angular/router';
 })
 export class LoginComponent {
   loginForm!:FormGroup
+  formState:string =  'sign in'
   constructor(private auth: AuthService,private formBuilder: FormBuilder,private router:Router){
     this.loginForm = this.formBuilder.group({
       email: ['',[Validators.required, Validators.email]],
@@ -20,12 +21,22 @@ export class LoginComponent {
     })
   }
   onSubmit(): void{
-    console.log(this.loginForm.value)
+    if(this.formState == 'sign in'){
+      this.auth.login(this.loginForm.controls['email'].value,this.loginForm.controls['password'].value).then(()=>{
+        this.router.navigate([''])
+      }).catch(err=>alert(err))
+    }else{
+      this.auth.register(this.loginForm.controls['email'].value,this.loginForm.controls['password'].value).then(()=>{
+        this.router.navigate([''])
+      }).catch(err=>alert(err))
+    }
   }
   googleLogin(){
     this.auth.googleLogin().then(()=>{
-      this.router.navigate(['/siteList'])
-    }).catch(err=>alert(err.message))
+      this.router.navigate([''])
+    }).catch(err=>alert(err))
   }
-
+  register(){
+    this.formState = 'sign up'
+  }
 }

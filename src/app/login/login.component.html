@@ -14,7 +14,7 @@
             <button class="p-2 text-center border w-full rounded-lg hover:rounded-full cursor-pointer" (click)="googleLogin()">
                 <img src="assets/logo.jpg" alt="google logo"
                 class="w-6 h-6 inline rounded-lg"/>
-                Sign in with Google
+                {{formState}} with Google
             </button>
         </div>
         <div class="flex items-center my-4">
@@ -41,13 +41,13 @@
             formControlName="password"
           />
         </div>
-        <button class="italic hover:underline cursor-pointer">Dont have an account</button>
+        <button *ngIf="formState == 'sign in'"  class="italic hover:underline cursor-pointer" (click)="register()">Dont have an account</button>
         <button
           type="submit"
           class="bg-gray-800 hover:rounded-full  text-white font-semibold cursor-pointer rounded-lg p-2 mt-4 w-full"
           (click)="onSubmit()"
         >
-          Login
+          {{formState}}
         </button>
       </form>
     </div>

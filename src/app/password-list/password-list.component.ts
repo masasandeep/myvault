@@ -118,7 +118,7 @@ export class PasswordListComponent {
         console.log('Password copied to clipboard:');
       })
       .catch((err) => {
-        console.log('Error copying password:', err);
+        alert('Error copying password:'+err);
       });
   }
 }
