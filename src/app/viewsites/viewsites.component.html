@@ -1,4 +1,4 @@
-<app-navbar></app-navbar>
+<app-navbar (search)="onChange($event)"></app-navbar>
 <div class="mx-auto p-4  min-h-screen lg:px-16 bg-[#222222] text-zinc-300">
   <div class="px-16 py-10 my-5 mx-auto rounded-full grid grid-cols-1 md:grid-cols-2 gap-4 h-full">
     <img class=" rounded-full w-[460px] m-auto" src="assets/main.jpg" alt="site">
@@ -13,7 +13,7 @@
     </div>
   </div>
 <p *ngIf="isSuccess" class="font-semibold bg-blue-300 text-white p-2 rounded-lg m-2 ">Data Saved Successfully</p>
-  <div *ngIf="showForm" class="px-16 py-10 border-2 my-5 mx-auto rounded-2xl grid grid-cols-1 md:grid-cols-2 gap-4">
+  <div #displayForm  *ngIf="showForm" class="px-16 py-10 border-2 my-5 mx-auto rounded-2xl grid grid-cols-1 md:grid-cols-2 gap-4">
     <img  class="rounded-lg w-[460px] m-auto" [src]="siteForm.get('siteImgURL')?.value || 'assets/home.jpg'" alt="site">
     <div>
       <h1 class="text-3xl font-bold p-3 text-center">{{state }} site</h1>
@@ -60,28 +60,30 @@
   </div>
 
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 p-4" *ngIf="allSites.length >0">
-    <div class="rounded-xl flex flex-col gap-4 p-4 w-95 sm:w-75  border-2 m-auto" *ngFor="let site of allSites ">
+    <div *ngFor="let site of allSites ">
+
+   
+    <div #showResult class="rounded-xl flex flex-col gap-4 p-4 w-95 sm:w-75  border-2 m-auto" *ngIf="searchResult(site)">
       <img
         [src]="site.siteImgURL"
         alt="site"
-        class="rounded-lg shadow-lg p-2 w-full"
+        class="rounded-lg shadow-2xl p-2 w-full"
       />
-      <p class="font-bold underline decoration-red-500 italic">Name:</p>
-      <h2 class="text-2xl font-semibold italic">{{site.siteName}}</h2>
-      <p class="underline decoration-red-500 italic font-bold">URL:</p>
-      <a class="font-semibold text-xl cursor-pointer rounded-lg underline decoration-amber-200 italic shadow-md" [href]="site.siteURL"
-        >{{site.siteURL}}</a
-      >
-      <div class="flex justify-center gap-2 items-center">
-        <button class="bg-[#222222]  text-white font-semibold p-2 rounded-lg cursor-pointer border border-red-700" [routerLink]="['/passwordList',site.id]">
-          Add New PassWord
-        </button>
+      
+      <div class="flex justify-between space-x-4 items-center">
+        <div class="space-x-4">
         <button class=" font-semibold p-2 bg-[#222222]  rounded-lg border-2 cursor-pointer  border-red-700" (click)="editSite(site.siteName,site.siteURL,site.siteImgURL,site.id)">
           Edit</button
         ><button class="font-semibold p-2  bg-[#222222] rounded-lg border-2 cursor-pointer  border-red-700 " (click)="deleteSite(site.id)">
           Delete
         </button>
+        </div>
+        
+        <button class="text-white p-2 rounded-lg cursor-pointer text-xl" [routerLink]="['/passwordList',site.id]">
+          <fa-icon [icon]="faArrow"></fa-icon>
+        </button>
       </div>
     </div>
+     </div>
   </div>
 </div>

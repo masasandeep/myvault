@@ -1,7 +1,12 @@
 <nav class="flex items-center justify-between p-2 m-1 shadow-2xl bg-[#222222] text-zinc-300">
-    <div class="text-lg font-bold italic ">MyVault</div>
+    <div class="text-lg font-bold italic flex space-x-4">
+        <img src="assets/vault.jpg" class="w-9 h-9 rounded-full shadow-2xl"/>
+        <p>MyVault</p>
+    </div>
+    <form>
+        <input type="text" placeholder="Search in vault" (input)="onChange($event)" class="rounded-2xl p-2  max-w-64 border " />
+    </form>
     <div class="flex items-center space-x-4">
-        <p class="font-semibold">Welcome </p>
         <a class="border-2 bg-[#222222] rounded-lg p-2 cursor-pointer hover:rounded-xl mr-4" routerLink="/">Home</a>
         <a class="border-2 bg-[#222222] rounded-lg p-2 cursor-pointer hover:rounded-xl mr-4" (click)="logout()">Logout</a>
     </div>
